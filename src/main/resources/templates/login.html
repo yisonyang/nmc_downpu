@@ -1,0 +1,108 @@
+<html xmlns="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登录注册</title>
+  <meta name="description" content="Coming Soon Responsive Template">
+  <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/main.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<!--CONTACT-->
+<div class="main">
+    <div class="login-wrap">
+      <div class="login-html">
+        <div class="login-header"><p class="logo-font">Down<span class="logo-font-color">Pu</span></p></div>
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登录</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">注册</label>
+        <div class="login-form">
+          <div class="sign-in-htm">
+            <form  th:object="${user}" action="login" method="post">
+            <div class="group">
+              <label for="user" class="label">用户名</label>
+              <input id="user" type="text" class="input"  th:field="*{username}">
+              <p th:text="${error_null}" STYLE="color: red"></p>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">密码</label>
+              <input id="pass" type="password" class="input" data-type="password"name="password" th:field="*{password}">
+              <p th:text="${error_incorrect}" STYLE="color: red"></p>
+            </div>
+            <div class="group">
+              <input id="check" type="checkbox" class="check" checked>
+              <label for="check"><span class="icon"></span> 记住我</label>
+            </div>
+            <div class="group">
+              <input type="submit" class="button" value="登录">
+            </div>
+            <div class="hr"></div>
+            <div class="foot-lnk">
+              <a href="#forgot">忘记密码</a>
+            </div>
+            </form>
+          </div>
+          <div class="sign-up-htm">
+            <form th:object="${user}" method="post" action="register">
+            <div class="group">
+              <label for="user" class="label">用户名</label>
+              <input id="user" type="text" class="input" th:field="*{username}">
+              <p th:text="${error_name}" STYLE="color: red"></p>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">密码</label>
+              <input id="pass" type="password" class="input" data-type="password" name="password" th:field="*{password}">
+              <p th:text="${error_password}"  STYLE="color: red"></p>
+            </div>
+            <div class="group">
+              <label for="pass" class="label">确认密码</label>
+              <input id="repass" type="password" class="input" data-type="password" name="repawd">
+            </div>
+            <div class="group">
+              <label for="code" class="label">验证码</label>
+              <input id="code" type="text" class="input input-size" name="idencode">
+              <div class="virification-code"  ><span th:text="${idencode}" style="color: #00a23f;font-size: 45px;margin-left: 15px;margin-top: 0px;"></span></div>
+              <p th:text="${error_idencode}"  STYLE="color: red"></p>
+            </div>
+            <div class="group">
+              <input type="submit" class="button" value="注册">
+            </div>
+            </form>
+            <div class="hr"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--CONTACT END--> 
+
+<!--site-footer-->
+
+<!--site-footer end--> 
+
+<!--PRELOAD-->
+<div id="preloader">
+  <div id="status"></div>
+</div>
+<!--end PRELOAD--> 
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.backstretch.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/retina.min.js"></script>
+<script src="js/tweetie.min.js"></script>
+<script src="js/jquery.downCount.js"></script>
+<script src="js/jquery.form.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/jquery.simple-text-rotator.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gmap.js"></script>
+</body>
+</html>

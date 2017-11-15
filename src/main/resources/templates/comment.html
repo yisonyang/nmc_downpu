@@ -1,0 +1,114 @@
+<html xmlns="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>评论</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet"  href="css/comment.css">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<nav class="navbar nav-default nav-backgroundColor" role="navigation">
+  <form class="navbar-form nav-center" role="search">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <a href="../index.html">
+          <span class="logo-font">Down<span class="logo-font-color">Pu</span></span>
+        </div>
+        <div class="col-xs-10 col-md-8 top-distance padleft">
+          <form role="form" id="mc-form" action="/search" method="get">
+            <div class="input-group">
+              <input type="text" class="form-control form-control-width" id="searchResult"  placeholder="search..." >
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-success" value="Subscribe">搜索<i class="fa fa-paper-plane"></i></button>
+                </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </form>
+</nav>
+<div class="container container-size">
+  <div class="row row-height">
+    <div class="row-left pull-left"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1484342823,356366591&fm=27&gp=0.jpg" class="image-width"></div>
+    <div class="row-right pull-left">
+      <h2 class="header" th:text="${item.name}"></h2>
+        <a th:href="@{/download(filename=${item.name},kind=${item.kind})}"><button type="submit" class="btn btn-success pull-right">下载</button></a>
+    </div>
+  </div>
+  <div class="row row-width-p">
+    <div class="col-xs-10 col-xs-offset-2">
+      <p class="content text-justify" th:text="${item.intro}"></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row row-display">
+    <div class="col-xs-12">
+      <h1>用户评论</h1>
+    </div>
+    <form role="form" th:action="@{/setComment}">
+    <div class="row row-width">
+      <hr>
+      <div class="col-xs-12 col-md-12 col-lg-12">
+          <div class="form-group">
+            <textarea  class="form-control" rows="5" placeholder="写评论..." name="usercomment"></textarea>
+            <input type="hidden" name="relateid" th:value="${item.idloaditem}">
+          </div>
+        <button type="submit" class="btn btn-primary pull-right">提交</button>
+      </div>
+    </div>
+    </form>
+    <div class="col-xs-12">
+      <p class="text-justify comment" style="width: 100%"> </p>
+      <p></p>
+      <hr>
+    </div>
+    <div class="col-xs-12 form-comment">
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="5"></textarea>
+        </div>
+      </form>
+      <form>
+        <button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>提交</button>
+      </form>
+    </div>
+  </div>
+  <div class="row row-width"th:each="comments:${comments}">
+    <hr>
+    <div class="col-xs-2 col-md-1">
+      <img th:src="@{/userimage(name=${comments.username})}" class="img-rounded img-user" alt="imgUser">
+    </div>
+    <div class="col-xs-6 col-md-4">
+      <h4 class="name" th:text="${comments.username}"></h4><br>
+      <p class="time" ><small th:text="${#dates.format(comments.loadDate,'yyyy-MM-dd')}"></small></p>
+    </div>
+    <div class="col-xs-12">
+      <p class="text-justify comment" th:text="${comments.commenttext}"></p>
+      <hr>
+    </div>
+    <div class="col-xs-12 form-comment">
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="5"></textarea>
+        </div>
+      </form>
+      <form>
+        <button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i>提交</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/comment.js"></script>
+</body>
+</html>

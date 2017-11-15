@@ -1,0 +1,73 @@
+<html xmlns="http://www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<link>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>搜索结果</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/search-result.css">
+    <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+  </head>
+<body>
+<nav class="navbar nav-default nav-backgroundColor" role="navigation">
+  <form class="navbar-form nav-center" role="search">
+    <div class="container"> 
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <a href="../index.html" class="deltext">
+          <span class="logo-font">Down<span class="logo-font-color">Pu</span></span>
+          </a>
+        </div>
+          <div class="col-xs-10 col-md-8 top-distance padleft">
+            <form role="form" id="mc-form" action="/search" method="get">
+              <div class="input-group">
+                <input type="text" class="form-control form-control-width" id="searchResult"  placeholder="search..." name="name" >
+                <span class="input-group-btn">
+                <button type="submit" class="btn btn-default btn-success" value="Subscribe">搜索<i class="fa fa-paper-plane"></i></button>
+                </span>
+              </div>
+            </form>
+          </div>
+      </div>  
+    </div>
+  </form>
+</nav>
+<div class="container container-height">
+  <div class="row">
+    <div class="col-xs-8 col-md-4 left-distance">
+      <p  th:text="'搜索['+${name}+']结果'">搜索&#91;<span id="searchContent"></span>的结果</p>
+    </div>
+  </div>
+</div>
+<div class="QR-code pull-left">
+  <figure>
+    <img class="hdxw-img" src="img/hdxw.jpg">
+    <figcaption class="img-font"><strong>扫码关注华电微网</strong></figcaption>
+  </figure>
+</div>
+<div class="container">
+  <div class="row">
+    <p th:text="${zero}">
+    <div class="col-xs-12">
+      <ul id="demoContent">
+        <li th:each="item:${searchResult}">
+          <img th:src="@{${item.image}}" class="pull-left content-img" >
+          <a th:href="@{/detail(id=${item.idloaditem})}">
+          <h3 th:text="${item.name}"></h3>
+            <p class="search-font pull-left  text-justify" th:text="${item.intro}"></p>
+          </a>
+    <a th:href="@{/download(filename=${item.name},kind=${item.kind})}"><button class="btn btn-success pull-right">下载</button></a>
+            <p class="data text-right" th:text="${#dates.format(item.uploaddate,'yyyy-MM-dd')}"></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/search-result.js"></script>
+</body>
+</html>

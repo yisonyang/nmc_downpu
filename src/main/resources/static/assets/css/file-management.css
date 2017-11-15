@@ -1,0 +1,27 @@
+.panel-body form {
+	display: inline-flex;
+}
+.panel .am-g{
+	margin-right: 0;
+}
+.am-content {
+	padding-left: 35px;
+}
+.am-form-group{
+	display: initial;
+	margin-left: 25px;
+	margin-bottom: 0;
+}
+#doc-form-file{
+	height: 33px;
+	overflow: hidden;
+}
+.am-btn-submit{
+	margin-left: 25px;
+}
+.panel-footer{
+	padding-top: 25px;
+}
+.theme-black .panel .am-g h2{
+	color: #fff;
+}

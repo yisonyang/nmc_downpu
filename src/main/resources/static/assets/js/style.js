@@ -1,0 +1,25 @@
+$(document).ready(function(){
+	$("#save").click(function(){
+		$.ajax({
+			type:"POST",
+			url:"serverjson.php",
+			dataType:"json",
+			data:{
+				name:$("#fileName").val(),
+				Type:$("#fileType").val(),
+				url:$("#fileUrl").val(),
+				content:$("#fileContent").val(),
+			},
+			success:function(data){	
+				if(data.success) {
+				$("#createResult").html(data.msg);
+				}else{
+				$("#createResult").html("出现错误："+data.msg);
+				}			
+			},
+			error:function(jqXHR){
+				alert("发生错误："+jqXHR.status);
+			}
+		})
+	})
+})

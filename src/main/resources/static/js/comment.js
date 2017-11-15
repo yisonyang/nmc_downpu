@@ -1,0 +1,18 @@
+$(document).ready(function(){
+    $(".reply").click(function(){
+        $(this).next().show();
+        $(this).parent().nextAll().show();
+    })
+    $(".cancel-reply").click(function(){
+        $(this).parent().nextAll().hide();
+        $(this).hide();
+    })
+	$(".reply").click(function(){
+		$(this).next().show();
+		$(this).parent().nextAll().show();
+	})
+	$(".cancel-reply").click(function(){
+		$(this).parent().nextAll().hide();
+		$(this).hide();
+	})
+})
