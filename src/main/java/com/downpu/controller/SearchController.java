@@ -28,6 +28,10 @@ public class SearchController {
    private DownItemRepository downItemRepository;
     @Autowired
     private CommentRepository commentRepository;
+    @RequestMapping(value = "index")
+    public String index(){
+        return "index";
+    }
     @RequestMapping(value = "/search")
     public ModelAndView getResult(ModelMap modelMap, @RequestParam("name") String name,HttpServletResponse response){
         List<DownItem> item=downItemRepository.findByNameLike("%"+name+"%");
@@ -36,7 +40,7 @@ public class SearchController {
         }
         modelMap.addAttribute("searchResult",item);
         modelMap.addAttribute("name",name);
-    return new ModelAndView("search-result");
+    return new ModelAndView("search");
  }
    @RequestMapping(value = "/detail")
     public ModelAndView getDetail(ModelMap modelMap, @RequestParam("id") Integer id, HttpServletRequest request){

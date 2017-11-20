@@ -1,0 +1,327 @@
+body {
+	background-color: rgba(0,0,0,0.1);
+}
+
+
+.banner {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 3;
+}
+
+.banner-body {
+	height: 64px;
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 0 1px 8px rgba(0,0,0,.3);
+	padding-left: 60px;
+}
+
+.banner-left {
+	display: flex;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: auto 0;
+	line-height: 48px;
+	float: left;
+	margin: 16px 0;
+}
+
+.banner-logo ,
+.banner-title {
+	float: left;
+	color: #676767;
+	line-height: 32px;
+	font-size: 21px;
+	font-weight: 500;
+}
+
+.banner-title {
+	border-left: 1px solid rgba(0,0,0,0.12);
+	padding-left: 24px;
+	margin-left: 24px;
+}
+
+
+.main {
+	position: absolute;
+	z-index: 1;
+	margin-top: 100px
+
+}
+
+
+.list {
+	overflow: hidden;
+	margin: auto 0;
+}
+
+.list li {
+	margin: 0 18px;
+	float:left;
+	min-height:10px;
+}
+
+*{margin:0;padding:0;}
+li{list-style:none;}
+
+
+.card {
+	border-radius: 4px;
+	transform-style:preserve-3d
+}
+
+.card-image {
+	cursor: pointer;
+}
+
+.card-content .card-item-content {
+	line-height: 20px;
+}
+
+.download {
+	overflow: hidden;
+	margin: 10px 0;
+}
+
+.download-name {
+	height: 36px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-right: 91px;
+    line-height: 36px;
+}
+
+.item_download_link {
+	float: right;
+	margin-top: -36px;
+}
+
+.background-mask {
+	width: 100%;
+	padding-bottom: 100%;
+	background-color: rgba(0,0,0,0.12);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 0;
+	overflow: hidden;
+	transition: .5s;
+	opacity: 0;
+}
+
+.background-mask .card {
+	position: fixed;
+	left: 50%; 
+	top: 50%; 
+	width: 530px; 
+	height: auto;
+	margin-left: -265px;
+	transform-origin: 0px 0px 0px;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	display: none;
+	transform:translateY(0);
+}
+
+.background-mask .card .card-title {
+	display: inline;
+}
+
+.background-mask .card .card-title input {
+	width: 80%;
+	font-weight: 500;
+}
+
+.background-mask .card .dropdown-button {
+	font-size: 1em;
+	padding: 0;
+	width: 16%;
+	margin-bottom: 20px;
+	margin-left: 2%;
+}
+
+.background-mask .card .dropdown-content li {
+	min-height: 30px;
+}
+
+.background-mask .card .dropdown-content li > a{
+	font-size: 14px;
+	line-height: 20px;
+	padding: 10px 16px;
+}
+
+.background-mask .card .card-content input ,
+.background-mask .card .card-content .input  {
+	color: #676767;
+	font-size: 15px;
+	line-height: 18px;
+	outline: none;
+}
+
+.background-mask .card .card-content .input {
+	height: 150px;
+	overflow-y:scroll;
+}
+
+.background-mask .card .card-content .input:empty::before {  
+            content: attr(placeholder);  
+            color: #999999;
+            font-weight: 100;
+        } 
+
+.background-mask .card .card-action {
+	clear: both;
+}
+
+
+.background-mask .card .card-action a {
+	cursor: pointer;
+}
+
+.background-mask .card .card-action .button {
+	margin-top: 10px;
+	overflow: hidden;
+}
+
+.background-mask .card .card-action .button span ,
+.background-mask .card .card-action .button button {
+	float: right;
+}  
+
+.background-mask .card .upload_image ,
+.background-mask .card .upload_file  {
+	display: none;
+}
+
+.card-photos {
+	height: auto;
+	overflow: hidden;
+	padding-top: 10px;
+}
+
+
+.img_thumbnail {
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin: 0 5px;
+	border-radius: 4px;
+}
+
+.img_thumbnail .remove_img {
+	background-color: #e66e65;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	position: relative;
+	top: -5px;
+	left: 85px;
+	overflow: hidden;
+	border-radius: 50%;
+	cursor: pointer;
+	vertical-align: middle;
+	box-shadow: 0 1px 8px rgba(0,0,0,.3);
+}
+
+.img_thumbnail .remove_img i {
+	color: white;
+	width: inherit;
+	display: inline-block;
+	line-height: 20px;
+	font-size: .5em;
+	text-align: center;
+}
+
+.photoDisplay_defualt {
+	background-color: #eee;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.fileList {
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+	margin: 10px 0 0 0;
+}
+
+.item {
+	width: 0;
+	height: 30px;
+	-webkit-transition: 1s;
+	-o-transition: 1s;
+	transition: 1s;
+}
+
+.collection ,
+.collection-item {
+	border: none!important;
+	padding: 0!important;
+}
+
+.fileList .item div i {
+	font-size: 20px;
+	line-height: 30px;
+	color: #fff;
+}
+
+.fileList .item .item-name ,
+.fileList .item .item-edit ,
+.fileList .item .item-delete {
+	position: absolute;
+	height: 30px;
+	width: 482px;
+	z-index: 4;
+	background-color: #fff;
+
+	font-size: 14px;
+	line-height: 30px;
+
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
+
+.fileList .item .item-edit {
+	width: 482px;
+	z-index: 3;
+	background-color: #f3c048;
+	text-align: right;
+	cursor: pointer;
+}
+
+.fileList .item .item-delete {
+	width: 0;
+	right: 0;
+	z-index: 5;
+	background-color: #e72d33;
+	text-align: right;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.fileList .item:hover > .item-name {
+	width: 382px;
+}
+.fileList .item:hover > .item-edit {
+	width: 432px;
+	padding: 0 15px;
+}
+.fileList .item:hover > .item-delete {
+	width: 50px;
+	padding: 0 15px;
+}
+
+.fileList .item > .item-delete:visited {
+	width: 482px;
+}
+

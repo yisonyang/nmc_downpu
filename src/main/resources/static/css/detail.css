@@ -1,0 +1,135 @@
+.backTolist {
+	margin-bottom: 50px;
+}
+
+body > .item {
+	padding-top: 30px;
+
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
+
+	transform: translateY(100px);
+}
+
+.item_base_info .item_avatar {
+	width: 100px;
+	height: 100px;
+	background-color: #777;
+	border-radius: 4px;
+
+	color: #fff;
+	font-size: 50px;
+	text-align: center;
+	line-height: 100px;
+	cursor: default;
+
+	float: left;
+}
+
+.item_base_info .item_name {
+	font-size: 24px;
+}
+
+.item_base_info .item_size ,
+.item_base_info .item_postTime {
+	font-size: 14px;
+}
+
+.item_base_info .item_name ,
+.item_base_info .item_size ,
+.item_base_info .item_postTime {
+	margin-left: 115px;
+	margin-bottom: 15px;
+}
+
+.item_links {
+	height: auto;
+	padding-top: 10px;
+}
+
+.item_links > div {
+	height: 36px;
+	line-height: 36px;
+	margin: 5px 0;
+}
+
+.item_links a {
+	padding: 2px 5px!important;
+}
+
+.item_download_link div {
+	float: left;
+	width: 6px;
+	height: 6px;
+	background-color: #747474;
+	border-radius: 3px;
+	margin: 4px 2px;
+
+	transition: 1s;
+}
+
+.item_description {
+	clear: both;
+	font-size: 14px;
+	line-height: 25px;
+
+	padding-top: 25px;
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+
+	border-bottom: 1px solid rgba(153,153,153,0.3);
+}
+
+.item_photos {
+	width: 800px;
+	height: 400px;
+	padding: 10px 20px;
+	border-radius: 4px;
+	text-align: center;
+	overflow: hidden;
+	margin: auto;
+}
+
+.item_photos .materialboxed,
+.item_photos .material-placeholder {
+	width: 600px;
+	height: 300px;
+}
+
+
+
+.item_photos .material-placeholder {
+	transition: margin 1.5s;
+}
+
+.item_photos .materialboxed:hover {
+	opacity: 1!important;
+}
+
+.item_photos .material-placeholder:nth-child(2) {
+	margin-left: 100px;
+	margin-top: -300px;
+}
+.item_photos .material-placeholder:nth-child(3) {
+	margin-left: 200px;
+	margin-top: -300px;
+}
+
+.item_photos .material-placeholder:nth-child(1):hover ~ .material-placeholder:nth-child(2) {
+	margin-left: 600px;
+}
+.item_photos .material-placeholder:nth-child(1):hover ~ .material-placeholder:nth-child(3) {
+	margin-left: 700px;
+}
+
+.item_photos .material-placeholder:nth-child(2):hover ~ .material-placeholder:nth-child(3) {
+	margin-left: 700px;
+}
+
+
+
+

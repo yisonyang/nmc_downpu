@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title id="webTitle">管理员页面-Down铺</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/materialize.css" />
+	<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+	<div class="banner">
+		<div class="banner-body">
+			<div class="banner-left">
+				<div class="banner-logo">Down 铺</div>
+				<div class="banner-title">首页</div>
+			</div>
+		</div>
+	</div>
+	<div class="main">
+		
+		<div class="list" id="list"></div>
+	</div>
+	<div class="fixed-action-btn">
+		<a class="btn-floating btn-large red">
+			<i class="large material-icons">mode_edit</i>
+		</a>
+		<ul>
+			<li><a class="addFile btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+			<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+		</ul>
+	</div>
+
+	<div class="background-mask">
+		<div class="card">
+			<div class="card-content white-text">
+				<span class="card-title">
+					<input type="text" placeholder="标题"/>
+				</span>
+				<!-- Dropdown Trigger -->
+				<div class='dropdown-button btn' data-activates='dropdown1' data-category="0">类 别</div>
+
+				<!-- Dropdown Structure -->
+				<ul id='dropdown1' class='dropdown-content'>
+					<!-- Category list here -->
+
+					<!-- End -->
+				</ul>
+				<div class="input" contenteditable placeholder="请输入软件的描述简介"></div> 
+				<div class="card-photos">
+					<span style="color:#747474;display:none;float:right;padding-top:80px;"><span class="photos_count">0</span> / 3</span>
+				</div>
+			</div>
+			<div class="card-action">
+				<a>
+					<i class="material-icons select_image">insert_photo</i>
+				</a>
+				<a>
+					<i class="material-icons select_fileURL">insert_link</i>
+				</a>
+				<div class="fileList collection"></div>
+				<div class="button">
+					<button class="btn waves-effect waves-light disabled" type="submit" name="action">发布
+						<i class="material-icons right">send</i>
+					</button>	
+					<span class="cancel waves-effect waves-teal btn-flat">取消</span>
+				</div>
+			</div>
+			<div class="attachment">
+			</div>
+			<input class="upload_image" type="file" />
+			<input class="upload_file" type="file" />
+		</div>
+	</div>
+
+</body>
+
+<script src="jQuery/jquery-3.2.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/waterFall.js"></script>
+<script src="js/admin.js"></script>
+
+</html>
