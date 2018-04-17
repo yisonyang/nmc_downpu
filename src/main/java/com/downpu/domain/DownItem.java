@@ -25,6 +25,15 @@ public class DownItem {
     private String url;
     private String kind;
     private String image;
+    private String size;
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public String getImage() {
         return image;

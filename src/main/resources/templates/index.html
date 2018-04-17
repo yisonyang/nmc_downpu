@@ -1,20 +1,107 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
+	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title id="webTitle">DOWN 铺</title>
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/style.css" />
+	<title>Down铺</title>
+	<link href="css/g.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/jquery.fullPage.css">
+	<link rel="stylesheet" href="css/materialize.min.css">		
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/soft_cate.css">
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/jquery.fullPage.min.js"></script>
+	<script src="js/materialize.min.js"></script>
+	<script>
+	$(function(){
+		$('#dowebok').fullpage({
+			sectionsColor: [ '#FFFFF', 'transparant'],
+			anchors: [ 'page2', 'page3'],
+			menu: '#menu'
+		});
+	});
+	</script>
 </head>
+
 <body>
-	<div class="main">
-		<div class="input_area">
-			<input type="text" />
+
+	<ul id="menu">
+		<li data-menuanchor="page2" class="active"><a href="#page2">软件搜索</a></li>
+		<li data-menuanchor="page3"><a href="#page3">软件分类</a></li>
+	</ul>
+
+	<div id="dowebok">
+		<div class="section">
+			<div class="main">
+				<div>
+					<img src="/images/logo.png" alt="logo" width="270" height="129">
+				</div>
+				<form action="/detail">
+					<div class="input_area">
+						<input type="text" id="text" name="name"/>
+					</div>
+					<div class="button">
+						<input value="Search" arial-label="Search" type="submit" placeholder="Search" >
+					</div>
+				</form>
+			</div>
 		</div>
-		<div class="button">
-			<input value="Search" arial-label="Search" type="submit" placeholder="Search"/>
+		<div class="section">
+			<!-- 头部logo 开始 -->
+			<div class="banner">
+			  <div class="banner-body">
+			    <div class="banner-right">
+			      <div class="banner-logo">Down 铺</div>
+			      <div class="banner-title">
+					  <img src="/images/logo.png" alt="logo" width="136" height="64">
+				  </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- 头部logo 结束 -->
+			<!-- 侧栏 开始 -->
+			<aside class="content col s12 left">
+				 <ul id="nav-mobile" class="side-nav">
+  			</ul>
+			</aside>
+			<!-- 侧栏 结束 -->
+			<div class="content">
+				<div class="row">
+					<div class="three_input_area">
+						<input type="text" placeholder="search" class="validate" value=""/>
+			      		<i class="material-icons">search</i>
+				 	</div>
+					<table class="highlight centered">
+			  	<thead id="list">
+			      <tr>
+			      	<th style="width: 50%;">文件名</th>
+			        <th style="width: 25%;">简介</th>
+			        <th style="width: 25%;">下载链接</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			    </tbody>
+			  </table>
+					<div class="page">
+			  	<ul class="pagination col s6 m4">
+	  			</ul>
+			  </div>
+			  		<footer>
+					<div class="footer-copyright">
+	           <a href="#">Copy Right © 2017 版权归网络管理协会所有</a>
+	        </div>
+     		</footer>
+				</div>
+			</div>
+			<div class="background_mask">
+				<div class="row col s12 m6 mask_size">
+					
+				</div>
+			</div>
 		</div>
 	</div>
+
+	<script src="js/soft_cate.js"></script>
 </body>
-<script src="js/materialize.js"></script>
+</html>

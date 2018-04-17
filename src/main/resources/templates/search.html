@@ -1,18 +1,42 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title id="webTitle">DOWN 铺</title>
-	<link rel="stylesheet" href="css/reset.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/detail.css" />
-	<link rel="stylesheet" href="css/materialize.css" />
+	<link th:href="@{css/reset.css}" rel="stylesheet"  type="text/css"/>
+	<link th:href="@{css/reset.css}" rel="stylesheet"  type="text/css"/>
+	<link th:href="@{css/style.css}" rel="stylesheet" type="text/css" />
+	<link th:href="@{css/detail.css}"  rel="stylesheet" type="text/css"/>
+	<link th:href="@{css/materialize.css}" rel="stylesheet" type="text/css"/>
+	<link th:href="@{css/g.css}" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript"  th:src="@{jQuery/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript"  th:src="@{js/materialize.js}"></script>
+	<script type="text/javascript"  th:src="@{js/search.js}"></script>
 </head>
 <body>
+	<div id="modal1" class="modal">
+		<div class="modal-content">
+			<h4>选择要下载的版本</h4>
+			<ul>
+				<li>
+					<span>下载1</span>
+					<a href="#!" class="waves-effect waves-green btn-flat float_right">下载</a>
+				</li>
+				<li>
+					<span>下载2</span>
+					<a href="#!" class="waves-effect waves-green btn-flat float_right">下载</a>
+				</li>
+			</ul>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">关闭</a>
+		</div>
+	</div>
 	<div class="banner">
-		<div class="logo float_left"></div>
+		<div class="logo float_left">
+			<a href="/downpu"><img src="/images/logo.png" alt="logo" width="100" height="44"></a>
+		</div>
 		<div class="input_area search_top">
 			<input type="text" />
 			<i class="material-icons">search</i>
@@ -20,7 +44,6 @@
 		<div class="button">
 		</div>
 	</div>
-
 	<div class="search_list">
 		<div class="resultCount">约有&nbsp;&nbsp;<i></i>&nbsp;&nbsp;项结果</div>
 
@@ -28,14 +51,13 @@
 			<ul></ul>
 		</div>
 	</div>
-
 	<div class="item container" >
 		<div class="backTolist waves-effect waves-teal btn-flat"><-- 返回搜索列表</div>
 		<div class="item_base_info">
-			<div class="item_avatar">M</div>
-			<div class="item_name">Matlab</div>
-			<div class="item_postTime">2017 年 7 月 30 日</div>
-			<div class="item_size">7.6 G</div>
+			<div class="item_avatar"></div>
+			<div class="item_name"></div>
+			<div class="item_postTime"></div>
+			<div class="item_size"></div>
 		</div>
 		<div class="item_links">
 			
@@ -45,15 +67,198 @@
 		</div>
 
 		<div class="item_photos" >
-			<img class="materialboxed" src="images/sample-1.jpg">
-			<img class="materialboxed" src="images/sample-2.jpg">
-			<img class="materialboxed" src="images/sample-3.jpg">
 		</div>
 	</div>
-
 	<div class="page-footer">Copy Right &copy; 2017 版权归网络管理协会所有</div>
 
 </body>
-<script src="jQuery/jquery-3.2.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/search.js"></script>
+<script th:inline="javascript">
+    $(document).ready(function(){
+        var search_result;
+        //var search_value = window.location.search;
+      //  search_value = search_value.substring(1, search_value.length);
+                search_result =[[${result}]];
+                console.log("result:"+search_result);
+                if (search_result.length==0){
+                    showTip();
+					function showTip() {
+                        createDiv();
+                        showDiv();
+                        hideDiv();
+                        function createDiv() {
+                            var oBox = document.createElement('div');
+                            oBox.id = 'box';
+                            oBox.style.width = 400 + 'px';
+                            oBox.style.height = 400 + 'px';
+                            oBox.style.position = 'absolute';
+                            oBox.style.left = '50%';
+                            oBox.style.top = '50%';
+                            oBox.style.padding='20px';
+                            oBox.style.transform = 'translateX(-50%) translateY(-50%)';
+                            document.body.appendChild(oBox);
+                            var oP = document.createElement('p');
+                            oP.innerHTML = "&nbsp&nbsp没有想要的结果？请微信扫码关注'华电网信'，后台回复所需资源，资源上传后我们会微信通知你";
+                            oP.style.marginTop='20px';
+                            oBox.appendChild(oP);
+                            var oImage = document.createElement('img');
+                            oImage.src = '/image/qrcode.jpg';
+                            oImage.alt = 'logo';
+                            oImage.style.width = 200 + 'px';
+                            oImage.style.height = 200 + 'px';
+                            oImage.style.position = 'absolute';
+                            oImage.style.left = '50%';
+                            oImage.style.marginTop='30px';
+                            oImage.style.marginLeft = -100 + 'px';
+                            oBox.style.background  = "#CDCDB4";
+                            oBox.appendChild(oImage);
+                            oBox.style.display = 'none';
+
+                        }
+                        function showDiv() {
+                            var oBox = document.getElementById('box');
+                            oBox.style.display = 'block';
+                        }
+
+                        function hideDiv() {
+                            var oBox = document.getElementById('box');
+                            document.onclick = function() {
+                                oBox.style.display = 'none';
+                            }
+                            oBox.onclick = function(e) {
+                                e = e || window.event;
+                                this.style.display = 'block';
+                                e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+                            }
+                        }
+                    }
+				}
+                listResult(search_result);
+        $('.item_download_link').click(function(){
+            $('.item_links').css("height","auto");
+        });
+
+        $('.item_links > .item_download_link[type=1]').click(function(){
+            $(this).parent().css("height","200px");
+            $(this).parent().css("border-bottom","1px solid rgba(153,153,153,0.3)");
+
+            $(this).children().css("float","none");
+            $(this).children().css("width","25px");
+            $(this).children().css("height","4px");
+            $(this).attr("type","2");
+        });
+
+        $('.item_links > .item_download_link[type=2]').click(function(){
+            $(this).parent().css("height","1px");
+            $(this).parent().css("border-bottom","none");
+            $(this).children().css("float","left");
+            $(this).children().css("width","4px");
+            $(this).children().css("height","4px");
+            $(this).attr("type","1");
+        });
+
+        $(".search_result .item_name").on("click" , ".item" , function(e){
+            var index = $(e.target).parent().find("i").attr("index");
+            $(".search_list").css({
+                "opacity" : "0" ,
+                "transform" : "translateX(-100px)",
+				"z-index": "-10",
+            })
+            setTimeout(function(){
+                $(".search_list").css("position","absolute");
+                itemDetail(search_result[index]);
+            },300);
+        });
+        $(".search_result .item_name").on("click", ".material-icons",function(e) {
+            var content1 = new String("");
+            var index = $(this).attr("index");
+            for (var i = 0; i < search_result[index].files.links.length; i++) {
+                content1 += '<li>';
+                content1 += '<span>' + search_result[index].files.links[i].name + '</span><a href="'+search_result[index].files.links[i].fileURL +'" class="waves-effect waves-green btn-flat float_right">下载</a></div>';
+                content1 += '</li>';
+            };
+            $("#modal1 .modal-content ul").html(content1);
+            $('.modal').fadeIn(500);
+
+        })
+        $(".modal").on("click",".modal-close",function() {
+            $('#modal1').fadeOut(500);
+            $("#modal1 .modal-content ul li").remove(); //清除dom
+        })
+        $('.banner .material-icons').on('click',function () {
+            var val = $('.banner .input_area input').val();
+            window.location.href = "/detail?name="+val;
+        })
+
+        $("body > .item .backTolist").on("click",function(){
+            $("body > .item").css({
+                "opacity" : "0" ,
+                "transform" : "translateY(100px)",
+
+            })
+            $(".search_list").css({
+                "position" : "relative" ,
+                "opacity" : "1" ,
+                "transform" : "translateX(0px)",
+				"z-index": "1",
+            });
+
+            setTimeout(function(){
+                $("body > .item").css({
+                    "position" : "absolute" ,
+                    "z-index" : "-1"
+                })
+            },500)
+        });
+    });
+
+    function listResult(search_result) {
+        var result = search_result;
+        var content = new String("");
+        for (var i = 0 ; i < result.length ; i++) {
+            content += '<li>';
+            content += '<div class="item_name"><span class="item">' + result[i].name + '</span><i class="material-icons float_right"  index = "'+ i +'">file_download</i></div>';
+            content += '<div class="item_postTime">'+result[i].postTime+'</div>';
+            content += '<div class="item_discription">'+result[i].discription+'</div>';
+            content += '</li>';
+
+        };
+        $(".search_list > .search_result > ul").html(content).hide().slideDown();
+        $(".search_list > .resultCount > i").text(result.length);
+    }
+
+    function itemDetail(detail) {
+        $("body > .item").css({
+            "opacity" : "1" ,
+            "transform" : "translateY(0px)",
+            "position" : "relative" ,
+            "z-index" : "1"
+        });
+        var itemPath = $("body > .item");
+        itemPath.children(".item_base_info").children(".item_avatar").text(detail.name[0]);
+        itemPath.children(".item_base_info").children(".item_name").text(detail.name);
+        itemPath.children(".item_base_info").children(".item_postTime").text(detail.postTime);
+        itemPath.children(".item_base_info").children(".item_size").text(detail.size);
+        itemPath.children(".item_description").html(detail.discription);
+
+        if (detail.photos) {
+            var photos = new String("");
+            var links=detail.photos.links.split(',');
+            for (var i = 0 ; i < links.length-1; i++) {
+                photos += '<img class="materialboxed" src="'+links[i]+'">';
+            };
+            itemPath.children(".item_photos").html(photos);
+            $('.materialboxed').materialbox();
+        };
+
+        if (detail.files) {
+            var files = "";
+            for (var i = 0 ; i < detail.files.links.length ; i++) {
+                files += '<div class="row clear"><span class="col s10">'+detail.files.links[i].name+'</span><a class="waves-effect waves-light btn col s2" href="'+detail.files.links[i].fileURL+'">下载</a></div>';
+            };
+            itemPath.children(".item_links").html(files);
+        };
+    }
+
+</script>
+<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+</html>

@@ -5,16 +5,15 @@
 
 	<groupId>com.downpu</groupId>
 	<artifactId>downpu</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>downpu</name>
+	<name>downPu</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.6.RELEASE</version>
+		<version>1.5.7.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -22,9 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<java.home>C:\Program Files\Java\jdk1.8.0_92</java.home>
 		<jdk.version>1.8</jdk.version>
-		<tomcat.version>7.0.69</tomcat.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -60,7 +57,7 @@
 			<artifactId>tomcat-juli</artifactId>
 			<version>${tomcat.version}</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<exclusions>
@@ -70,6 +67,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-juli</artifactId>
@@ -92,12 +90,30 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.40</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/catalina -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>catalina</artifactId>
 			<version>6.0.26</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<!-- optional=true,依赖不会传递，该项目依赖devtools；之后依赖boot项目的项目如果想要使用devtools，需要重新引入 -->
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
 		</dependency>
     </dependencies>
 
@@ -112,8 +128,29 @@
 					<target>${jdk.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<compilerArguments>
-						<bootclasspath>${java.home}\jre\lib\rt.jar;${java.home}\jre\lib\jce.jar</bootclasspath>
 					</compilerArguments>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -1,7 +1,4 @@
 $(document).ready(function(){
-
-    listResult();
-
     $('.item_download_link').click(function(){
         $('.item_links').css("height","auto");
     });
@@ -19,7 +16,6 @@ $(document).ready(function(){
     $('.item_links > .item_download_link[type=2]').click(function(){
         $(this).parent().css("height","1px");
         $(this).parent().css("border-bottom","none");
-
         $(this).children().css("float","left");
         $(this).children().css("width","4px");
         $(this).children().css("height","4px");
@@ -36,7 +32,22 @@ $(document).ready(function(){
             itemDetail();            
         },300);
     });
+    $(".search_result .item_name").on("click", ".material-icons",function(e) {
+        var content1 = new String("");
+        var index = $(this).attr("index");
+        for (var i = 0; i < result[index].links.length; i++) {
+            content1 += '<li>';
+            content1 += '<span>' + result[index].links[i].name + '</span><a href="'+result[index].links[i].link +'" class="waves-effect waves-green btn-flat float_right">下载</a></div>';
+            content1 += '</li>';
+        };
+        $("#modal1 .modal-content ul").html(content1);
+        $('.modal').fadeIn(500);
 
+    })
+    $(".modal").on("click",".modal-close",function() {
+        $('#modal1').fadeOut(500);
+        $("#modal1 .modal-content ul li").remove(); //清除dom
+    })
     $("body > .item .backTolist").on("click",function(){
         $("body > .item").css({
             "opacity" : "0" ,
@@ -64,50 +75,35 @@ $(document).ready(function(){
 //            |---search_result.postTime
 //            |---search_result.discription
 //            |---search_result.links
-//
+//            |---search.file
+//                  |
+//                  |---search.file.links[{name,fileURL},{name,fileURL}]
+
+
 function listResult(search_result) {
     //example
-    search_result = [
-        {
-            name : "Matlab 2016a" ,
-            postTime : "2017 08 10" ,
-            discription : "MathWorks is the leading developer of mathematical computing software. Engineers .." ,
-            links : [
-                {
-                    name : "Matlab 2016a x86" ,
-                    link : "..."
-                } ,
-                {
-                    name : "Matlab 2016a 64" ,
-                    link : "..."
-                }
-            ]
-        },
-        {
-            name : "Microsoft Word" ,
-            postTime : "2017 08 11" ,
-            discription : "Microsoft word is the best document editor in the world .." ,
-            links : [
-                {
-                    name : "Microsoft word 2017 x86" ,
-                    link : "..."
-                } ,
-                {
-                    name : "Microsoft word 2017 64" ,
-                    link : "..."
-                }
-            ]
+    var search_value = window.location.search;
+    search_value = search_value.substring(1, search_value.length);  
+    
+    /*$.ajax({
+        url: '',
+        type: 'POST',
+        data: JSON.stringify(search_value),
+        success:function(data) {
+            var search_result = data;
         }
-    ]
+
+    })*/
     var result = search_result;
-    console.log(result);
+    //console.log(result);
     var content = new String("");
     for (var i = 0 ; i < result.length ; i++) {
-        content += '<li>' ;
-        content += '<div class="item_name"><span class="item">'+result[i].name+'</span><i class="material-icons float_right">file_download</i></div>';
+        content += '<li>';
+        content += '<div class="item_name"><span class="item">' + result[i].name + '</span><i class="material-icons float_right"  index = "'+ i +'">file_download</i></div>';
         content += '<div class="item_postTime">'+result[i].postTime+'</div>';
         content += '<div class="item_discription">'+result[i].discription+'</div>';
         content += '</li>';
+
     };
 
     $(".search_list > .search_result > ul").html(content).hide().slideDown();

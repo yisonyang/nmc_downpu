@@ -1,25 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title id="webTitle">管理员页面-Down铺</title>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/materialize.css" />
-	<link rel="stylesheet" href="css/admin.css" />
+	<link th:href="@{css/g.css}" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{css/reset.css}"/>
+	<link rel="stylesheet" th:href="@{css/materialize.css}" />
+	<link rel="stylesheet" th:href="@{css/admin.css}" />
+	<link rel="icon" type="image/x-icon" href="/image/favicon.ico">
 </head>
 <body>
 	<div class="banner">
 		<div class="banner-body">
 			<div class="banner-left">
 				<div class="banner-logo">Down 铺</div>
-				<div class="banner-title">首页</div>
+				<div class="banner-title">后台录入页</div>
 			</div>
 		</div>
 	</div>
 	<div class="main">
-		
 		<div class="list" id="list"></div>
 	</div>
 	<div class="fixed-action-btn">
@@ -28,15 +28,16 @@
 		</a>
 		<ul>
 			<li><a class="addFile btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-			<li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+			<li><a class="btn-floating yellow darken-1" href="/list"><i class="material-icons">format_quote</i></a></li>
 		</ul>
 	</div>
 
 	<div class="background-mask">
-		<div class="card">
+		<form class="card" id="itemData" enctype="multipart/form-data" name="itemInfo">
 			<div class="card-content white-text">
 				<span class="card-title">
-					<input type="text" placeholder="标题"/>
+					<input type="text" name="appName" placeholder="标题" autofocus/>
+					<input type="text" name="size" placeholder="大小 请带单位(以64位为准)"/>
 				</span>
 				<!-- Dropdown Trigger -->
 				<div class='dropdown-button btn' data-activates='dropdown1' data-category="0">类 别</div>
@@ -47,23 +48,31 @@
 
 					<!-- End -->
 				</ul>
-				<div class="input" contenteditable placeholder="请输入软件的描述简介"></div> 
+				<textarea id="description" class="input" name="description" placeholder="请输入软件的描述简介"></textarea>
 				<div class="card-photos">
 					<span style="color:#747474;display:none;float:right;padding-top:80px;"><span class="photos_count">0</span> / 3</span>
 				</div>
 			</div>
 			<div class="card-action">
-				<a>
-					<i class="material-icons select_image">insert_photo</i>
-				</a>
-				<a>
-					<i class="material-icons select_fileURL">insert_link</i>
-				</a>
+				<div class="con">
+					<div class="image_upload">
+						<a><i class="material-icons select_fileURL">insert_link</i></a>
+						<input type="file" class="upload" name="file" />
+					</div>
+					<div class="image_upload">
+						<a><i class="material-icons select_fileURL">insert_link</i></a>
+						<input type="file" class="upload" name="file" />
+					</div>
+					<div class="image_upload">
+						<a><i class="material-icons select_fileURL">insert_link</i></a>
+						<input type="file" class="upload" name="file" />
+					</div>
+				</div>
 				<div class="fileList collection"></div>
 				<div class="button">
-					<button class="btn waves-effect waves-light disabled" type="submit" name="action">发布
+					<button class="btn waves-effect waves-light" id="btn-submit" type="button" name="action" onclick="Send()">发布
 						<i class="material-icons right">send</i>
-					</button>	
+					</button>
 					<span class="cancel waves-effect waves-teal btn-flat">取消</span>
 				</div>
 			</div>
@@ -71,14 +80,13 @@
 			</div>
 			<input class="upload_image" type="file" />
 			<input class="upload_file" type="file" />
-		</div>
+		</form>
 	</div>
 
 </body>
-
-<script src="jQuery/jquery-3.2.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/waterFall.js"></script>
-<script src="js/admin.js"></script>
-
+<script th:src="@{jQuery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{js/jq.form.min.js}"></script>
+<script th:src="@{js/materialize.js}"></script>
+<script th:src="@{js/admin.js}"></script>
+<script th:src="@{js/list.js}"></script>
 </html>

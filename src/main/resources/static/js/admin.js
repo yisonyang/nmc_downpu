@@ -9,10 +9,10 @@ $(document).ready(function(){
 		if (!files.length || !window.FileReader) return;
 		if (/^image/.test( files[0].type)){
 			var reader = new FileReader();
+			console.log(files[0]);
 			reader.readAsDataURL(files[0]);
 			reader.onloadend = function(){
 				thumbnails(this.result);
-
 				isAbleUploadImage();
 				keepCardMiddle();
 			}
@@ -30,15 +30,8 @@ $(document).ready(function(){
 	});//取消发布的点击事件
 
 	//形成软件类别列表
-	getCategoryList();
+	getCategoryList_dropdown1();
 
-
-	//软件类别选择
-	$(".card #dropdown1 > li").click(function(){
-		var category = $(this).text();
-		var data_category = $(this).attr("data-category");
-		$(this).parent().prev().text(category).attr("data-category",data_category);
-	});//软件类别选择
 
 	//删除已添加的文件的点击事件
 	$(".background-mask .card .card-action .fileList").on("click",".item-delete",function(){
@@ -58,13 +51,24 @@ $(document).ready(function(){
 	});//上传图片按钮的点击事件
 
 	//添加文件按钮的点击事件
-	$(".background-mask .card .card-action").on("click",".select_fileURL",function(){
-		fileAdded("demo","...");
+	$(".background-mask .card .card-action").on("click",".con",function(){
+		var subName = $(".card-title input").val();
+		fileAdded(subName);
 	});//添加文件按钮的点击事件
-
 });
 
-
+//检查是否为空
+function check() {
+	var key = true;
+/*	var input_val = $('.card input');
+	for(var i=0;i<input_val.length;i++){
+		console.log(input_val[i].val());
+		if(!input_val[i].val()){
+			key = false;
+		}
+	}*/
+	return key;
+}
 //判断是否达到上传图片的上限
 function isAbleUploadImage() {
 	var photos_limit = 3;
@@ -107,15 +111,20 @@ function thumbnails(url) {
 	img_path.children("span").show();
 }//判断是否达到上传图片的上限
 
+//使编辑框保持在屏幕中间
+function keepCardMiddle(option) {
+    option = option || 0;
+    var translateY = ($(".background-mask > .card").height()- option) / 2;
+    $(".background-mask > .card").css("transform","translateY(-"+translateY+"px)");
+}//使编辑框保持在屏幕中间
 
 //添加文件链接时，生成文件列表
 //@param file_name (string格式)
 //@param file_url (string格式)
 //
-function fileAdded(file_name , file_url) {
+function fileAdded(file_name) {
 	var item_path = $(".background-mask > .card > .card-action > .fileList");
-	var item = 
-		'<div class="item collection-item" data-name="'+file_name+'" data-url="'+file_url+'">'+
+		item = '<div class="item collection-item" data-name="'+file_name+'">'+
 			'<div class="item-name">'+file_name+'</div>'+
 			'<div class="item-edit"><i class="material-icons">edit</i></div>'+
 			'<div class="item-delete"><i class="material-icons">delete</i></div>'+
@@ -141,93 +150,51 @@ function fileAdded(file_name , file_url) {
 
 function addPost(option) {
 
-	//渲染表格
-	$(".background-mask").css({
-			"opacity" : "1" ,
-			"z-index" : "1000"
-	});
+    //渲染表格
+    $(".background-mask").css({
+        "opacity" : 1,
+        "z-index" : 1000,
+        "display": "block"
+    });
 
-	$(".background-mask > .card").fadeIn(100);
-	keepCardMiddle();	
+    $(".background-mask > .card").fadeIn(100);
+    keepCardMiddle();
 
-	$(".background-mask > .card").find(".card-title input").focus();
-
-	$("body").css("overflow","hidden");
-	//结束
-
-	//Example 传入数据option例子
-	option = {
-		title : "Microsoft Word" ,
-		category : "2",
-		discription : "Microsoft word is the best document editor",
-		photos : {
-			link : ["images/sample-1.jpg","images/sample-2.jpg","images/sample-3.jpg"]
-		},
-		files : {
-			link : [{name:"Microsoft word 2016 x86",fileURL:"..."},{name:"Microsoft word 2016 64",fileURL:"..."}]
-		}
-	}
-	//End here
-
-	//往编辑框里面填内容
-	//若option为空，则填空，若不为空，则填option的内容
-	option = option || {};
-	var title = option.title || "" ;
-	var category = option.category || "0" ;
-	var discription = option.discription || "" ;
-
-	$(".card-title input").val(title);
-	$(".card-content .dropdown-button").text(matchCategory(category));
-	$(".card").find(".input").html(discription);
-
-	if (option.photos) {
-		for (var i = 0 ; i < option.photos.link.length ; i++) {
-			thumbnails(option.photos.link[i]);
-			isAbleUploadImage();
-			keepCardMiddle();
-		};
-	};
-
-	if (option.files) {
-		for (var i = 0 ; i < option.files.link.length ; i++) {
-			fileAdded(option.files.link[i].name,option.files.link[i].fileURL);
-			keepCardMiddle();
-		};
-	};
-}//初始化文件编辑界面
+    $("body").css("overflow","hidden");
+    dropDown();
+}
 
 
 //取消发布执行函数
 function cancelPost() {
 
-	//初始化编辑框控件的内容
-	if ($(".card-title input").val()) {
-		$(".card-title input").val("")
-	};
-	if ($(".card").find(".input").html()) {
-		$(".card").find(".input").html("")
-	};
-	if ($(".card-photos > div")) {
-		$(".card-photos > div").remove();
-	};
-	if ($(".fileList > .item")) {
-		$(".fileList > .item").remove();
-	};
+    //初始化编辑框控件的内容
+    if ($(".card-title input").val()) {
+        $(".card-title input").val("")
+    };
+    if ($(".card").find(".input").html()) {
+        $(".card").find(".input").html("")
+    };
+    if ($(".card-photos > div")) {
+        $(".card-photos > div").remove();
+    };
+    if ($(".fileList > .item")) {
+        $(".fileList > .item").remove();
+    };
 
-	isAbleUploadImage();
+    //关闭编辑框的动画
+    $(".background-mask > .card").fadeOut(500);
+    $(".background-mask > .card").css("transform","translateY(100px)");
 
+    $(".background-mask").css({
+        "opacity" : 1,
+        "z-index" : 1000,
+        "display": "none"
+    });
 
-	//关闭编辑框的动画
-	$(".background-mask > .card").fadeOut(500);
-	$(".background-mask > .card").css("transform","translateY(100px)");
+    setTimeout('$(".background-mask").css("z-index","0")',500);
 
-	$(".background-mask").css({
-		"opacity" : "0" 
-	});
-
-	setTimeout('$(".background-mask").css("z-index","0")',500);
-
-	$("body").css("overflow","visible");
+    $("body").css("overflow","visible");
 }//取消发布执行函数
 
 //删除已添加的图片
@@ -242,29 +209,31 @@ function remove_img(obj) {
 }//取消发布
 
 
-//使编辑框保持在屏幕中间
-function keepCardMiddle(option) {
-	option = option || 0;
-	var translateY = ($(".background-mask > .card").height()- option) / 2;
-	$(".background-mask > .card").css("transform","translateY(-"+translateY+"px)");
-}//使编辑框保持在屏幕中间
-
-
 //get category list
 //
 //@param category (arry格式)
 //
 //return json
-function getCategoryList() {
-	//example
-	var category = ['系统安全','网络','数学','影音音频'];
-	var list = "";
+function getCategoryList_dropdown1() {
+	var category = [];
+    $.ajax({
+        type: 'GET',
+        url: '/category',
+        dataType: 'JSON',
+        async: false,
+        success: function (content) {
+            category = content.category;
+            var list = "";
 
-	for (var i = 1 ; i <= category.length ; i++) {
-		list = list + '<li data-category="'+i+'"><a>'+category[i-1]+'</a></li>';
-	};
+            for (var i = 1 ; i <= category.length ; i++) {
+                list = list + '<li data-category="'+i+'"><a>'+category[i-1]+'</a></li>';
+            };
 
-	$("#dropdown1").html(list);
+            $("#dropdown1").html(list);
+
+        }
+    });
+
 }//get category list
 
 
@@ -273,5 +242,52 @@ function getCategoryList() {
 function matchCategory(category_num) {
 	return $("#dropdown1 > li[data-category="+category_num+"]").text() || "类 别";
 }//匹配类别
+
+var type="";
+function dropDown(){
+    //console.log("l:"+$("#dropdown1 li").length);
+    for(var i = 0; i < $("#dropdown1 li").length; i++) {
+        $("#dropdown1 li")[i].onclick = function () {
+            var _this = this.getElementsByTagName("a")[0];
+            type = _this.innerHTML;
+            //console.log("type:" + type);
+            $(".dropdown-button").html(type);
+            // console.log("first:" + type);
+            //this.val();
+        }
+    }
+}
+function Send() {
+    var area=$('#description').val();
+    var reg=new RegExp("\n","g");
+    var regSpace=new RegExp(" ","g");
+
+    area= area.replace(reg,"<br>");
+    area = area.replace(regSpace,"&nbsp;");
+    $('#description').val(area);
+    //console.log($("#description").val());
+    var data=new FormData($('#itemData')[0]);
+    data.append("type",type);
+    $.ajax({
+        url:"/upload",
+        type:"post",
+        data:data,
+        dataType:"JSON",
+        charset:"UTF-8",
+        cache:false,
+        processData:false,
+        contentType:false,
+        success:function (ret) {
+            console.log("ret:"+ret.result);
+            if (ret.result.equals("success")) {
+                cancelPost();
+
+            }else {
+                alert(ret.result);
+            }
+
+        }
+    })
+}
 
 

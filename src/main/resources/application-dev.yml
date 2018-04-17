@@ -1,0 +1,32 @@
+spring:
+ datasource:
+   driver-class-name: com.mysql.jdbc.Driver
+   url: jdbc:mysql://127.0.0.1:3306/downpu?useUnicode=true&characterEncoding=UTF-8
+   username: "nmc"
+   password: "wgxh7525197"
+ thymeleaf:
+   prefix: classpath:/templates/
+   cache: false
+   encoding: UTF-8
+   suffix: .html
+   mode: LEGACYHTML5
+ jpa:
+  hibernate:
+     ddl-auto: update
+     show-sql: true
+ mvc:
+   static-path-pattern: /**
+   favicon:
+    enabled: false
+ resources:
+   static-locations: classpath:/META_INF/resources,classpath:/resources/,classpath:/static/,classpath:/public/,file:/Users/yison/Desktop/
+devtools:
+  restart: additional-path=src/main
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+
+myProps:
+  baseDir: D://file/
+  imageDir: D://image/
